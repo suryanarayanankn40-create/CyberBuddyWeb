@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CyberBuddy Web – Surya</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;font-family:Poppins,sans-serif}
+
+body{
+margin:0;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+}
+
+.screen{
+  min-height:100vh;
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.screen.active{
+  display:flex;
+}
+.card{
+background:rgba(0,0,0,.55);
+padding:30px;
+border-radius:18px;
+width:100%;
+max-width:950px;
+text-align:center;
+}
+
+button{
+padding:12px 22px;
+border:none;
+border-radius:10px;
+background:#4f8cff;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin:8px;
+}
+button:hover{background:#6ea1ff}
+
+html, body{
+  height:100%;
+}
+
+body{
+  margin:0;
+
+  background-image: url("Bg.jpeg");   
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+input{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
+margin-top:10px;
+}
+
+.corner-brand{
+  position:fixed;
+  top:10px;
+  right:10px;
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  font-size:12px;
+  color:#ccc;
+  z-index:9999;
+}
+
+.first-logo{
+  display:block;
+  margin:12px auto 12px auto;   /* clean normal spacing */
+  width:400px;
+}
+
+}
+
+/* Instagram style login box */
+
+#login{
+    background:#000;
+}
+
+#login .container{
+    background:#fff;
+    padding:60px;
+    border-radius:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    width:380px;
+    text-align:center;
+}
+
+#login .logo{
+    margin-bottom:10px;
+}
+
+.Instagram{
+  color:#000;
+  font-family: Instagram Sans;
+  font-size: 36px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+#login input[type="text"],
+#login input[type="password"]{
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+    border:1px solid #dbdbdb;
+    border-radius:4px;
+    font-size:14px;
+}
+
+#login input[type="button"]{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    background:#3897f0;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* warning screen */
+
+.warningCard{
+background:#2a0000;
+border:2px solid red;
+color:#ffdcdc;
+}
+
+/* more page */
+
+#more{
+  padding:20px;
+  overflow-y:auto;
+}
+
+
+.card{
+  background:#141414;
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 0 10px rgba(0,0,0,.4);
+}
+
+.card h3{
+  margin-top:0;
+  color:#6ddcff;
+}
+
+.card ul, .card ol{
+  line-height:1.7;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+
+.gallery img{
+  width:100%;
+  border-radius:8px;
+  border:1px solid #333;
+  cursor:pointer;
+  transition:transform .2s;
+}
+
+.gallery img:hover{
+  transform:scale(1.05);
+}
+
+.note{
+  font-size:14px;
+  opacity:.7;
+  margin-top:8px;
+}
+
+.danger{
+  border-left:4px solid #ff6b6b;
+}
+
+button{
+  margin-top:10px;
+  padding:8px 14px;
+  border:none;
+  border-radius:6px;
+  background:#00bcd4;
+  color:black;
+  cursor:pointer;
+}
+
+/* quiz layout */
+
+#quiz .options{
+max-width:420px;
+margin:15px auto;
+}
+
+#quiz label{
+display:grid;
+grid-template-columns:20px 1fr;
+column-gap:10px;
+text-align:left;
+margin:10px 0;
+}
+
+#quiz input{margin-top:4px}
+</style>
+</head>
+
+<body>
+<div style="background:#ffcc00;color:black;padding:10px;text-align:center;font-weight:bold;">
+⚠️ Educational Demo Only – This website is created for cybersecurity awareness and phishing simulation.
+It does NOT collect real data.
+</div>
+
+
+<!-- intro -->
+<div id="intro" class="screen active">
+  <div class="card">
+    <h1>CyberBuddy Web</h1>
+    <p>Cyber Security Awareness Project</p>
+    <img src="logo.png" class="first-logo">
+    <br>
+    <button onclick="show('login')">Let's Begin</button>
+
+  </div>
+</div>
+
+
+<!-- login -->
+<div id="login" class="screen">
+
+  <div class="container">
+
+      <img class="logo"
+           src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+           width="80">
+      <h2 class="Instagram">Instagram</h2>
+
+      <!-- IMPORTANT: no form action -->
+      <input type="text" id="demoUser" placeholder="Phone number, username or email" required>
+
+      <input type="password" id="demoPass" placeholder="Password" required>
+
+      <input type="button" value="Log in" onclick="fakeLogin()">
+
+  </div>
+
+</div>
+
+<!-- fake login warning -->
+<div id="fakeNotice" class="screen">
+<div class="card warningCard">
+
+<h2>⚠ Fake Login Page Detected</h2>
+<p>
+This was a simulated phishing login page created only for
+cyber security awareness.
+</p>
+
+<button onclick="show('awarenessScreen')">Next</button>
+
+</div>
+</div>
+
+<!-- menu -->
+<div id="awarenessScreen" class="screen">
+<div class="card">
+
+<h2>Awareness Modules</h2>
+
+<button onclick="show('checker')">🔗 Phishing Link Checker</button>
+<button onclick="show('more')">📘 More To Know</button>
+<button onclick="openQuiz()">🧠 Cyber Safety Quiz</button>
+<br>
+<br>
+<button onclick="openAdmin()">🛡 Admin View</button>
+
+
+</div>
+</div>
+
+<!-- checker -->
+<div id="checker" class="screen">
+<div class="card">
+
+<h2>Phishing Link Checker</h2>
+
+<input id="checkLink" placeholder="https://example.com">
+<button onclick="checkPhishingLink()">Check</button>
+
+<p id="linkResult"></p>
+
+<button onclick="goBack()">← Back</button>
+
+</div>
+</div>
+
+<!-- more -->
+<div id="more" class="screen">
+
+  <h2>More to Know – Phishing Awareness</h2>
+
+  <!-- HOW PHISHING WORKS -->
+  <section class="card">
+    <h3>How a phishing attack works</h3>
+    <ol>
+      <li>Attacker creates a fake website or message.</li>
+      <li>User receives an email, SMS or social media message.</li>
+      <li>User clicks the link.</li>
+      <li>User enters login or personal data.</li>
+      <li>Attacker steals and misuses the data.</li>
+    </ol>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section class="card">
+    <h3>Real looking phishing examples</h3>
+
+    <div class="gallery">
+
+      <!-- Replace these image links if you want -->
+      <img src="image1.jpg" alt="Phishing email example">
+      <img src="image2.jpg" alt="Fake login page example">
+      <img src="image3.png" alt="Phishing SMS example">
+
+    </div>
+
+    <p class="note">
+      These images show how scammers copy real websites and messages to trick users.
+    </p>
+  </section>
+
+  <!-- COMMON TRICKS -->
+  <section class="card">
+    <h3>Common phishing tricks</h3>
+    <ul>
+      <li>Urgent warnings like “Your account will be suspended”</li>
+      <li>Free gifts, rewards and lucky winner messages</li>
+      <li>Fake technical support calls or messages</li>
+      <li>Shortened or strange looking links</li>
+      <li>Spelling mistakes and unusual sender addresses</li>
+    </ul>
+  </section>
+
+  <!-- HOW TO CHECK LINKS -->
+  <section class="card">
+    <h3>How to verify a suspicious link</h3>
+    <ul>
+      <li>Check the full website address carefully.</li>
+      <li>Do not trust only the logo or page design.</li>
+      <li>Search the website name in Google.</li>
+      <li>Scan links using trusted online scanners.</li>
+    </ul>
+  </section>
+
+  <!-- IF YOU CLICKED -->
+  <section class="card danger">
+    <h3>If you clicked a phishing link</h3>
+    <ul>
+      <li>Immediately change your password.</li>
+      <li>Log out from all devices.</li>
+      <li>Enable two-factor authentication.</li>
+      <li>Report the message as phishing.</li>
+      <li>Check your account activity.</li>
+    </ul>
+  </section>
+
+  <!-- INTERACTIVE CHECKLIST -->
+  <section class="card">
+    <h3>Think before you click</h3>
+
+    <label><input type="checkbox"> Is the sender really known to me?</label><br>
+    <label><input type="checkbox"> Does the link look normal?</label><br>
+    <label><input type="checkbox"> Is the message trying to scare me?</label><br>
+    <label><input type="checkbox"> Am I being asked for password or OTP?</label><br>
+
+    <button onclick="checkAwareness()">Check my awareness</button>
+    <p id="awareResult"></p>
+    <br>
+    <button onclick="goBack()">← Back</button>
+  </section>
+
+</div>
+
+<!-- quiz -->
+<div id="quiz" class="screen">
+<div class="card">
+
+<h3 id="qno"></h3>
+<p id="q"></p>
+
+<div class="options">
+<label><input type="radio" name="op" value="0"><span id="o0"></span></label>
+<label><input type="radio" name="op" value="1"><span id="o1"></span></label>
+<label><input type="radio" name="op" value="2"><span id="o2"></span></label>
+<label><input type="radio" name="op" value="3"><span id="o3"></span></label>
+</div>
+
+<button onclick="submitQ()">Submit</button>
+<button onclick="nextQ()">Next</button>
+
+<p id="res"></p>
+<p id="fact"></p>
+
+<button onclick="quizBack()">← Back</button>
+
+</div>
+</div>
+
+<!-- quiz result -->
+<div id="quizResult" class="screen">
+<div class="card">
+
+<h2>Quiz Result</h2>
+<h3 id="finalScore"></h3>
+<h3 id="finalLevel"></h3>
+
+
+<button onclick="show('awarenessScreen')">Back to Menu</button>
+
+</div>
+</div>
+
+<!-- admin -->
+<div id="admin" class="screen">
+<div class="card">
+
+<h2>Admin View</h2>
+
+<table id="adminTable" border="1" style="width:100%;border-collapse:collapse;">
+<tr><th>User</th><th>Password</th><th>Time</th></tr>
+</table>
+
+<button onclick="goBack()">← Back</button>
+
+</div>
+</div>
+
+<script>
+let historyStack=[];
+let currentScreen="intro";
+
+function show(id){
+if(currentScreen!==id) historyStack.push(currentScreen);
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+currentScreen=id;
+}
+
+function goBack(){
+if(!historyStack.length)return;
+let p=historyStack.pop();
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(p).classList.add("active");
+currentScreen=p;
+}
+
+/* fake login */
+
+let loginLogs=[];
+
+function fakeLogin(){
+
+let u=demoUser.value.trim();
+let p=demoPass.value.trim();
+
+if(!u||!p){alert("Enter details");return;}
+
+loginLogs.push({user:u,pass:p,time:new Date().toLocaleString()});
+
+demoUser.value="";
+demoPass.value="";
+
+show("fakeNotice");
+}
+
+/* checker */
+
+function checkPhishingLink(){
+
+    let link = checkLink.value.trim().toLowerCase();
+    let r = linkResult;
+
+    let risky = ["login","verify","secure","update","account","free","gift","reward","suspended"];
+    let short = ["bit.ly","t.co","tinyurl","goo.gl"];
+
+    let score = 0;
+
+    if(link.startsWith("www.")){
+    link = "https://" + link;
+}
+    if(link.startsWith("http://")){
+        r.style.color = "#ffd36e";
+        r.innerText = "This link is NOT secure.\nIt uses HTTP instead of HTTPS.";
+        return;
+    }
+
+    if(link.startsWith("https://")){
+
+        risky.forEach(w=>{
+            if(link.includes(w)) score++;
+        });
+
+        short.forEach(s=>{
+            if(link.includes(s)) score += 2;
+        });
+
+        if(score >= 3){
+            r.style.color = "#ff9f9f";
+            r.innerText = "Dangerous link";
+        }
+        else if(score >= 2){
+            r.style.color = "#ffd36e";
+            r.innerText = "Risky link";
+        }
+        else{
+            r.style.color = "#7cffb2";
+            r.innerText = "Safe link";
+        }
+
+        return;
+    }
+
+    // Wrong format
+    r.style.color = "#ff0000";
+    r.innerText = "You entered a wrong website format";
+}
+
+
+/* More to know */
+function checkAwareness(){
+
+  const checks = document.querySelectorAll("#more input[type=checkbox]");
+  let count = 0;
+
+  checks.forEach(c=>{
+    if(c.checked) count++;
+  });
+
+  const r = document.getElementById("awareResult");
+
+  if(count >= 3){
+    r.style.color="#7cffb2";
+    r.innerText="Good! You are thinking safely before clicking.";
+  }
+  else{
+    r.style.color="#ff9f9f";
+    r.innerText="Be careful! Always verify messages and links.";
+  }
+}
+
+/* quiz (10 questions) */
+
+let qi=0,score=0,answered=false;
+let userAns=[];
+
+const quizData=[
+{q:"What is phishing mainly used for?",o:["Hacking Wi-Fi","Stealing personal data","Making viruses","Speeding internet"],a:1,f:"Phishing steals sensitive data."},
+{q:"Which is a common phishing sign?",o:["Friendly tone","Nice logo","Urgent warning","Long email"],a:2,f:"Urgency is a big sign."},
+{q:"Which detail is most dangerous to share?",o:["Colour","Phone model","OTP code","Country"],a:2,f:"OTP gives direct access."},
+{q:"Which platform is often used for phishing?",o:["Messaging apps","Calculator","Camera","Settings"],a:0,f:"Most attacks start from messages."},
+{q:"What is social engineering?",o:["Coding","Manipulating people","Networking","Hardware"],a:1,f:"It targets human behaviour."},
+{q:"Which link is less safe?",o:["https link","gov site","bank site","http link"],a:3,f:"HTTP is not encrypted."},
+{q:"Which is a phishing example?",o:["Fake login page","School site","Calculator app","Gallery"],a:0,f:"Fake login pages steal credentials."},
+{q:"Which user is most targeted?",o:["Teachers","Students","Admins","Developers"],a:1,f:"Students are common victims."},
+{q:"What should you do after clicking a bad link?",o:["Ignore","Change password","Post online","Restart phone"],a:1,f:"Change password immediately."},
+{q:"Which is best protection?",o:["Same password","Public Wi-Fi","Strong unique password","Auto login"],a:2,f:"Strong passwords reduce risk."},
+{q:"What is the main goal of a phishing attack?",o:["Improve security","Steal login or personal data","Fix software bugs","Speed up network"],a:1,f:"Phishing attacks mainly try to steal personal or login data."},
+{q:"Which email is most likely a phishing email?",o:["Monthly report from school","Password reset you did not request","Message from your friend","Exam timetable mail"],a:1,f:"Unexpected password reset emails are common phishing tricks."},
+{q:"Which part of a website link should you check carefully?",o:["Logo image","Text on the button","Domain name","Page colour"],a:2,f:"The domain name shows the real website."},
+{q:"What does a fake login page usually copy?",o:["Only the background","Only text","Real website design","Browser theme"],a:2,f:"Phishing pages copy real website designs to fool users."},
+{q:"Which is a common sign of a fake website?",o:["Spelling mistakes","Fast loading","Dark theme","Large images"],a:0,f:"Many phishing pages contain spelling and grammar mistakes."},
+{q:"Which message is more suspicious?",o:["Your class notes are ready","Verify your account immediately or it will be locked","Happy birthday message","New assignment posted"],a:1,f:"Urgent messages are often used in phishing attacks."},
+{q:"Which of the following is safest?",o:["Clicking a link in SMS","Clicking a link in email","Typing the website address manually","Clicking popup ads"],a:2,f:"Typing the site address yourself is safer."},
+{q:"What is a phishing website designed to look like?",o:["A game website","A real trusted website","A search engine","A news website"],a:1,f:"Phishing sites imitate real trusted websites."},
+{q:"Which information should never be shared on unknown sites?",o:["Username","OTP","Profile photo","Display name"],a:1,f:"OTP can give direct access to your account."},
+{q:"Which device can be affected by phishing attacks?",o:["Only computers","Only mobile phones","Only tablets","All internet-connected devices"],a:3,f:"Any device connected to the internet can be targeted."},
+{q:"What is the safest action if a site looks suspicious?",o:["Continue browsing","Share the link","Close it and verify from official site","Refresh the page"],a:2,f:"Always close and verify using the official website."},
+{q:"Which login page is more risky?",o:["School portal login","Bank app login","Social media fake page","Government portal"],a:2,f:"Fake social media pages are commonly used for phishing."},
+{q:"Which technique is used to make users panic?",o:["Encryption","Backup","Urgency and threats","Updates"],a:2,f:"Attackers use fear and urgency to rush users."},
+{q:"Which is a safer password?",o:["surya123","password123","Siva@tutor#45","student2024"],a:2,f:"Strong passwords use symbols, numbers and mixed case letters."},
+{q:"Which feature adds extra protection to your account?",o:["Auto login","Saving passwords","Two-factor authentication","Private tab"],a:2,f:"Two-factor authentication protects even if the password is stolen."}
+];
+
+function openQuiz(){
+qi=0;
+userAns=[];
+show("quiz");
+loadQuiz();
+}
+
+function quizBack(){
+
+  if(qi > 0){
+    qi--;
+    loadQuiz();
+  }
+  else{
+    // qi == 0  → first question
+    show("awarenessScreen");   // <-- your awareness module id
+  }
+}
+
+function loadQuiz(){
+
+qno.innerText="Question "+(qi+1)+" of "+quizData.length;
+q.innerText=quizData[qi].q;
+
+for(let i=0;i<4;i++)
+  document.getElementById("o"+i).innerText=quizData[qi].o[i];
+
+let ops = document.getElementsByName("op");
+ops.forEach(r=>r.checked=false);
+
+// restore previous answer
+if(userAns[qi] != undefined){
+  ops[userAns[qi]].checked = true;
+}
+
+res.innerText="";
+fact.innerText="";
+
+// if already answered before, keep answered true
+answered = userAns[qi] != undefined;
+}
+
+function submitQ(){
+
+let sel=[...document.getElementsByName("op")].find(r=>r.checked);
+if(!sel){alert("Select one");return;}
+
+let selected = +sel.value;
+
+// store answer
+userAns[qi] = selected;
+
+if(selected === quizData[qi].a){
+  res.innerText="Correct";
+}else{
+  res.innerText="Wrong";
+}
+
+fact.innerText="Fact: "+quizData[qi].f;
+answered=true;
+}
+
+function nextQ(){
+
+  if(userAns[qi] == undefined){
+    alert("Please submit the answer");
+    return;
+  }
+
+  if(qi < quizData.length - 1){
+    qi++;
+    loadQuiz();
+  }
+  else{
+
+    let s = 0;
+
+    for(let i = 0; i < quizData.length; i++){
+      if(userAns[i] === quizData[i].a){
+        s++;
+      }
+    }
+
+    let level = "";
+
+    if(s <= 8){
+      level = "Beginner";
+      finalTip.innerText =
+        "Tip: Learn how fake links, urgent messages and OTP scams work. Never click unknown links.";
+    }
+    else if(s <= 16){
+      level = "Intermediate";
+      finalTip.innerText =
+        "Tip: You have good awareness. Still verify website URLs and avoid reward or offer messages.";
+    }
+    else{
+      level = "Advanced";
+      finalTip.innerText =
+        "Excellent! You understand phishing and online scams well. Help others stay safe too.";
+    }
+
+    finalScore.innerText = "Score : " + s + " / " + quizData.length;
+    finalLevel.innerText = "Knowledge Level : " + level;
+
+    show("quizResult");
+  }
+}
+
+/* admin */
+
+function openAdmin(){
+
+let table=adminTable;
+table.innerHTML="<tr><th>User</th><th>Password</th><th>Time</th></tr>";
+
+loginLogs.forEach(l=>{
+let r=table.insertRow();
+r.insertCell().innerText=l.user;
+r.insertCell().innerText="*".repeat(l.pass.length);
+r.insertCell().innerText=l.time;
+});
+
+show("admin");
+}
+</script>
+
+</body>
+</html>
